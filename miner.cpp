@@ -70,7 +70,7 @@ uint32_t mineblock(uint32_t noncestart, char* version, char* prevhash,
 
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
-    while(solved == 0)
+    while(true)
     {
         nonce++;
 
