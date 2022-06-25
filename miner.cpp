@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <iostream>
+#include <chrono>
 
 #include "util.h"
 #include "sha256.h"
@@ -39,7 +40,7 @@ void hashblock(uint32_t nonce, char* version, char* prevhash,
     hexstr_to_intarray(nbits, blockheader + 18);
     *(blockheader + 19) = nonce;
 
-    print_bytes((unsigned char*)blockheader, 80);
+    //print_bytes((unsigned char*)blockheader, 80);
 
     for(int i = 0; i < 20; i++)
         blockheader[i] = Reverse32(blockheader[i]);
@@ -49,7 +50,7 @@ void hashblock(uint32_t nonce, char* version, char* prevhash,
 
     hash(hash0, 256, result);
 
-    print_bytes((unsigned char*)result, 32);
+    //print_bytes((unsigned char*)result, 32);
 }
 
 // Searches for a valid block hash with given nonce, given difficulty defined by nbits
@@ -66,6 +67,8 @@ uint32_t mineblock(uint32_t noncestart, char* version, char* prevhash,
     char solved = 0;
     uint32_t hash[8];
     uint32_t nonce = noncestart-1;
+
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
     while(solved == 0)
     {
@@ -85,6 +88,14 @@ uint32_t mineblock(uint32_t noncestart, char* version, char* prevhash,
             // And if they're equal, we keep going!
         }
 
-        
+        if(((nonce - noncestart) % 10000) == 0 && nonce != noncestart)
+        {
+            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+            long duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+
+            float hashrate = 10000000.0 / (float)duration;
+            std::cout << "Currently mining at " << hashrate << " hashes / second" << std::endl;
+            start = std::chrono::steady_clock::now();
+        }
     }
 }

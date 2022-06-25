@@ -9,14 +9,15 @@
 int main()
 {
     // Genesis Block info
-    char *version = "01000000";
-    char *prevhash = "0000000000000000000000000000000000000000000000000000000000000000";
-    char *merkle_root = "3BA3EDFD7A7B12B27AC72C3E67768F617FC81BC3888A51323A9FB8AA4B1E5E4A";
-    char *time = "29AB5F49";
-    char *nbits = "FFFF001D";
+    char version[] = "01000000";
+    char prevhash[] = "0000000000000000000000000000000000000000000000000000000000000000";
+    char merkle_root[] = "3BA3EDFD7A7B12B27AC72C3E67768F617FC81BC3888A51323A9FB8AA4B1E5E4A";
+    char time[] = "29AB5F49";
+    char nbits[] = "FFFF001D";
 
     uint32_t result[8];
-    uint32_t nonce = mineblock(2083236890, version, prevhash, merkle_root, time, nbits);
+    //uint32_t nonce = mineblock(2083236890, version, prevhash, merkle_root, time, nbits);
+    uint32_t nonce = mineblock(10, version, prevhash, merkle_root, time, nbits);
     
     std::cout << "Block solved ! Nonce: " << nonce << std::endl;
     std::cout << "Block hash:" << std::endl;

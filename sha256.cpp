@@ -48,7 +48,7 @@ uint32_t sig1(uint32_t x)
     return(rotateInt(x, 17) ^ rotateInt(x, 19) ^ (x >> 10));
 }
 
-int hash(uint32_t *input, int bitlength, uint32_t *outputlocation)
+void hash(uint32_t *input, int bitlength, uint32_t *outputlocation)
 {
     uint32_t H_0[8] = { 0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19 };
 
