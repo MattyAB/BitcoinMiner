@@ -55,4 +55,5 @@ void hexstr_to_intarray(const char* hexstr, uint32_t* outputloc)
             + ((uint32_t)bytes[i * 4 + 2] << 16)
             + ((uint32_t)bytes[i * 4 + 3] << 24);
     }
+    free(bytes);
 }
