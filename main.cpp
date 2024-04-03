@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string.h>
+#include <cstdint>
 
 #include "sha256.h"
 #include "miner.h"
