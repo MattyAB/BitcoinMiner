@@ -1,4 +1,4 @@
-#include <stdint.h>
+#include <cstdint>
 #include <iostream>
 #include <chrono>
 
@@ -64,7 +64,7 @@ uint32_t mineblock(uint32_t noncestart, char* version, char* prevhash,
     hexstr_to_intarray(nbits, bits);
     bits_to_difficulty(*bits, difficulty);
 
-    char solved = 0;
+    /* char solved = 0; */
     uint32_t hash[8];
     uint32_t nonce = noncestart-1;
 
@@ -80,7 +80,7 @@ uint32_t mineblock(uint32_t noncestart, char* version, char* prevhash,
         {
             if(hash[7-i] < difficulty[i])
             {
-                solved = 1;
+                /* solved = 1; */
                 return nonce;
             }
             else if(hash[7-i] > difficulty[i])

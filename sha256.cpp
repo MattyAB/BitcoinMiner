@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <iostream>
 
 uint32_t rotateInt(uint32_t inputWord, int numberOfBitsToRotate) 
@@ -70,7 +71,7 @@ void hash(uint32_t *input, int bitlength, uint32_t *outputlocation)
     0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2};
 
     int wordlength = bitlength / 32 + 1;
-    int k = (512 * 512 - bitlength - 1) % 512;
+    /* int k = (512 * 512 - bitlength - 1) % 512; */
     uint32_t message[10000] = {};
 
     for(int i = 0; i < wordlength; i++)
@@ -97,8 +98,8 @@ void hash(uint32_t *input, int bitlength, uint32_t *outputlocation)
         
     uint32_t M[32][16];
 
-    for(int i = 0; i < 16; i++)
-        for(int j = 0; j <= rounds; j++)
+    for(uint32_t i = 0; i < 16; i++)
+        for(uint32_t j = 0; j <= rounds; j++)
             M[j][i] = message[i + j * 16];
     
     uint32_t H[32][8];
@@ -107,7 +108,7 @@ void hash(uint32_t *input, int bitlength, uint32_t *outputlocation)
         H[0][i] = H_0[i];
 
     // Here our hash function rounds actually start.
-    for(int i = 1; i <= rounds; i++)
+    for(uint32_t i = 1; i <= rounds; i++)
     {
         uint32_t a = H[i-1][0];
         uint32_t b = H[i-1][1];

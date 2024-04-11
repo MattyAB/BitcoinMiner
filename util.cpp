@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <iostream>
 #include <iomanip>
 #include <string.h>
@@ -49,10 +50,11 @@ void hexstr_to_intarray(const char* hexstr, uint32_t* outputloc)
 
     for(size_t i = 0; i < intlen; i++)
     {
-        uint32_t a = (uint32_t)bytes[i * 4 + 3] << 24;
+        /* uint32_t a = (uint32_t)bytes[i * 4 + 3] << 24; */
         *(outputloc + i) = ((uint32_t)bytes[i * 4])
             + ((uint32_t)bytes[i * 4 + 1] << 8)
             + ((uint32_t)bytes[i * 4 + 2] << 16)
             + ((uint32_t)bytes[i * 4 + 3] << 24);
     }
+    free(bytes);
 }
